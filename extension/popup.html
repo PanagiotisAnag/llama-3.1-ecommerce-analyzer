@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 400px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f0f0f;
+      color: #e0e0e0;
+    }
+
+    .header {
+      background: #1a1a1a;
+      padding: 14px 16px;
+      border-bottom: 1px solid #2a2a2a;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header h1 { font-size: 15px; font-weight: 600; color: #fff; }
+    .header span { font-size: 11px; color: #666; margin-left: auto; }
+
+    .content { padding: 16px; }
+
+    #analyze-btn {
+      width: 100%;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #analyze-btn:hover { background: #1d4ed8; }
+    #analyze-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+
+    .status {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      min-height: 18px;
+    }
+
+    .product-title {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #aaa;
+      line-height: 1.4;
+      border-left: 3px solid #2563eb;
+      padding-left: 8px;
+    }
+
+    .verdict-box {
+      margin-top: 14px;
+      border-radius: 10px;
+      padding: 14px;
+      display: none;
+    }
+
+    .verdict-box.winner { background: #052e16; border: 1px solid #16a34a; }
+    .verdict-box.loser  { background: #2d0a0a; border: 1px solid #dc2626; }
+    .verdict-box.risky  { background: #1c1200; border: 1px solid #ca8a04; }
+    .verdict-box.unknown { background: #1a1a1a; border: 1px solid #444; }
+
+    .verdict-label { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+    .winner .verdict-label { color: #4ade80; }
+    .loser  .verdict-label { color: #f87171; }
+    .risky  .verdict-label { color: #fbbf24; }
+    .unknown .verdict-label { color: #aaa; }
+
+    .score { font-size: 13px; color: #aaa; margin-top: 4px; }
+
+    .full-analysis {
+      margin-top: 10px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #ccc;
+      white-space: pre-wrap;
+      max-height: 200px;
+      overflow-y: auto;
+      background: #1a1a1a;
+      border-radius: 6px;
+      padding: 10px;
+    }
+
+    .adcopy-box {
+      margin-top: 14px;
+      background: #0a1628;
+      border: 1px solid #2563eb;
+      border-radius: 10px;
+      padding: 14px;
+      display: none;
+    }
+
+    .adcopy-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #60a5fa;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .adcopy-content {
+      font-size: 12px;
+      line-height: 1.6;
+      color: #ccc;
+      white-space: pre-wrap;
+      max-height: 250px;
+      overflow-y: auto;
+      background: #111827;
+      border-radius: 6px;
+      padding: 10px;
+    }
+
+    .copy-btn {
+      margin-top: 8px;
+      width: 100%;
+      padding: 8px;
+      background: #1e3a5f;
+      color: #60a5fa;
+      border: 1px solid #2563eb;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover { background: #2563eb; color: white; }
+
+    .error-box {
+      margin-top: 12px;
+      background: #2d0a0a;
+      border: 1px solid #dc2626;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+      color: #f87171;
+      display: none;
+    }
+
+    .server-warning {
+      margin-top: 12px;
+      background: #1c1200;
+      border: 1px solid #ca8a04;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 11px;
+      color: #fbbf24;
+      display: none;
+    }
+
+    .divider {
+      margin: 14px 0;
+      border: none;
+      border-top: 1px solid #2a2a2a;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Product Analyzer</h1>
+    <span id="site-label">—</span>
+  </div>
+
+  <div class="content">
+    <div class="server-warning" id="server-warning">
+      API server is not running.<br>
+      Start it with: <code>python api_server.py</code>
+    </div>
+
+    <button id="analyze-btn">Analyze This Product</button>
+    <div class="status" id="status"></div>
+    <div class="product-title" id="product-title" style="display:none"></div>
+
+    <div class="verdict-box" id="verdict-box">
+      <div class="verdict-label" id="verdict-label"></div>
+      <div class="score" id="score-label"></div>
+      <div class="full-analysis" id="full-analysis"></div>
+    </div>
+
+    <div class="adcopy-box" id="adcopy-box">
+      <div class="adcopy-title">Ad Copy</div>
+      <div class="adcopy-content" id="adcopy-content"></div>
+      <button class="copy-btn" id="copy-btn">Copy Ad Copy</button>
+    </div>
+
+    <div class="error-box" id="error-box"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

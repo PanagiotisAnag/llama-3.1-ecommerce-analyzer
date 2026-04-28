@@ -1,0 +1,33 @@
+# Model weights (upload to HuggingFace instead)
+combined_model/
+hf_cache/
+
+# Datasets (too large for GitHub)
+*.jsonl
+raw_reviews.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# HuggingFace cache
+huggingface_cache/
+
+# Unsloth cache
+unsloth_compiled_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
