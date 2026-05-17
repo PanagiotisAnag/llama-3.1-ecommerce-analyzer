@@ -2,7 +2,7 @@ import os
 from huggingface_hub import HfApi, login
 
 MODEL_DIR = r"E:\Machine Learning\combined_model"
-REPO_ID = "PanosAnag/llama-3.1-ecommerce-analyzer"
+REPO_ID = "PanosAnag/MarketLens"
 
 print("Logging in to HuggingFace...")
 login()

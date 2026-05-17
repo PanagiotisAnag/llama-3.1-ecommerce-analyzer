@@ -20,11 +20,11 @@ from trl import SFTTrainer, SFTConfig
 
 MODEL_NAME    = r"E:\Machine Learning\hf_cache\hub\models--meta-llama--Meta-Llama-3.1-8B-Instruct\snapshots\0e9e39f249a16976918f6564b8830bc894c89659"
 DATA_FILE     = "combined_qa.jsonl"
-OUTPUT_DIR    = "combined_model"
+OUTPUT_DIR    = "marketlens_model"
 
-MAX_SEQ_LEN   = 1024   # reduced to save VRAM
-LORA_RANK     = 8      # reduced to save VRAM
-BATCH_SIZE    = 1      # minimum batch size
+MAX_SEQ_LEN   = 512
+LORA_RANK     = 16
+BATCH_SIZE    = 1
 GRAD_ACCUM    = 8      # effective batch = 8
 EPOCHS        = 1
 LEARNING_RATE = 2e-4
@@ -71,7 +71,7 @@ model.gradient_checkpointing_enable()
 
 lora_config = LoraConfig(
     r=LORA_RANK,
-    lora_alpha=16,
+    lora_alpha=32,
     target_modules=["q_proj", "k_proj", "v_proj", "o_proj",
                     "gate_proj", "up_proj", "down_proj"],
     lora_dropout=0.05,

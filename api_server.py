@@ -9,7 +9,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 BASE_MODEL = r"E:\Machine Learning\hf_cache\hub\models--meta-llama--Meta-Llama-3.1-8B-Instruct\snapshots\0e9e39f249a16976918f6564b8830bc894c89659"
-LORA_MODEL = r"E:\Machine Learning\combined_model"
+LORA_MODEL = r"E:\Machine Learning\marketlens_model"
 
 ANALYZE_PROMPT = """You are a cynical e-commerce product auditor. Your job is to analyze product specs and customer reviews to determine if a product is worth investing in for dropshipping or white label.
 

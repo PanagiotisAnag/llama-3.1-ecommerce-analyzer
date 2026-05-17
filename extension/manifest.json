@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Product Analyzer",
-  "version": "1.0",
-  "description": "Analyze any product page for dropshipping/white label potential",
+  "name": "MarketLens",
+  "version": "2.0",
+  "description": "AI-powered product intelligence for e-commerce sellers",
   "permissions": ["activeTab", "scripting"],
   "host_permissions": [
     "https://www.amazon.com/*",
