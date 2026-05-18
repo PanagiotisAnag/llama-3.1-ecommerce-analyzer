@@ -25,7 +25,7 @@ Fine-tuned from `meta-llama/Meta-Llama-3.1-8B-Instruct` using QLoRA:
 - Trained on **150,000 examples** (75K product analysis + 75K marketing copy)
 - Dataset: [McAuley-Lab/Amazon-Reviews-2023](https://huggingface.co/datasets/McAuley-Lab/Amazon-Reviews-2023) — 25 categories, 135,235 real products with reviews
 
-HuggingFace: [PanosAnag/MarketLens](https://huggingface.co/PanosAnag/MarketLens)
+HuggingFace: [PanosAnag/llama-3.1-ecommerce-analyzer](https://huggingface.co/PanosAnag/llama-3.1-ecommerce-analyzer)
 
 ## Dataset
 
