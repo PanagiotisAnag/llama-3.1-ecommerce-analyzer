@@ -116,7 +116,7 @@ def format_entry(entry):
 
 formatted  = [format_entry(r) for r in raw_data]
 dataset    = Dataset.from_list(formatted)
-split      = dataset.train_test_split(test_size=0.1, seed=42)
+split      = dataset.train_test_split(test_size=1000, seed=42)
 train_data = split["train"]
 eval_data  = split["test"]
 
@@ -143,12 +143,13 @@ trainer = SFTTrainer(
         gradient_accumulation_steps=GRAD_ACCUM,
         warmup_steps=50,
         learning_rate=LEARNING_RATE,
-        fp16=True,
+        fp16=False,
+        bf16=True,
         logging_steps=25,
         eval_strategy="steps",
-        eval_steps=100,
+        eval_steps=500,
         save_strategy="steps",
-        save_steps=200,
+        save_steps=500,
         save_total_limit=2,
         load_best_model_at_end=True,
         report_to="none",
