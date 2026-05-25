@@ -9,7 +9,7 @@ tags:
 - e-commerce
 - text-generation
 pipeline_tag: text-generation
-license: mit
+license: llama3.1
 ---
 
 # MarketLens — AI Product Intelligence

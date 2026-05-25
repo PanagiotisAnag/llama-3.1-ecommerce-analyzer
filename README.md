@@ -108,4 +108,4 @@ For Temu and Alibaba (block automated scraping), paste the product title, price,
 
 ## License
 
-MIT
+This project is subject to the [Llama 3.1 Community License](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct/blob/main/LICENSE) as it is built on Meta's Llama 3.1 8B Instruct model.
